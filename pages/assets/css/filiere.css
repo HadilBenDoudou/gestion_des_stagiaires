@@ -1,0 +1,28 @@
+#categorySelect {
+    opacity: 0.2; /* Adjust the value to control the transparency (0.0 - fully transparent, 1.0 - fully opaque) */
+    border-radius: 10px; /* Adjust the value to control the radius of the corners */
+    margin-bottom: 50px;
+    width: 600px;
+    height: 30px;
+  
+  
+  }
+  .owl-courses-item .item img {
+    height: 200px; /* Set your preferred height */
+    width: 290px; /* Maintain aspect ratio */
+  }
+  #searchBtn {
+    /* Adjust the value to control the transparency (0.0 - fully transparent, 1.0 - fully opaque) */
+    border-radius: 10px; /* Adjust the value to control the radius of the corners */
+    margin-bottom: 50px;
+    width: 100px;
+    cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  height: 35px;background-color:#769255;color:white"
+  
+}
+
+#searchBtn:hover {
+  background-color: #3f4448;
+  color: white; /* Text color on hover */
+}

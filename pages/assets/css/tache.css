@@ -1,0 +1,74 @@
+   /* Styles pour le conteneur de la rangée flexible */
+   .flexrow-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; /* Ajoute de l'espace en bas */
+}
+
+/* Styles pour les sélecteurs de thème */
+.theme-selector {
+    width: 50px;
+    height: 50px;
+    margin: 0 10px; /* Ajoute de l'espace entre les sélecteurs */
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Styles spécifiques pour chaque sélecteur de thème */
+.standard-theme {
+    background-color: #336d57;
+}
+
+.light-theme {
+    background-color: #d3d3d3;
+}
+
+.darker-theme {
+    background-color: #808080;
+}
+
+/* Styles pour le titre */
+#title {
+    color: white;
+    text-align: center;
+    position: relative; /* Position relative pour permettre de positionner l'élément fils */
+}
+
+/* Styles pour la bordure sous le titre */
+#border {
+    position: absolute;
+    bottom: -10px; /* Pour placer la bordure juste en dessous du titre */
+    left: 50%; /* Alignement au centre */
+    transform: translateX(-50%); /* Ajustement pour le centrage */
+    width: 100px;
+    height: 2px;
+    background-color: white;
+} #title {
+    color: white;
+    text-align: center;
+    position: relative; /* Position relative pour permettre de positionner l'élément fils */
+    animation: moveText 2s infinite alternate; /* Animation pour déplacer le texte */
+}
+
+/* Définition de l'animation */
+@keyframes moveText {
+    from {
+        transform: translateX(-10px); /* Déplacer le texte de -10px */
+    }
+    to {
+        transform: translateX(10px); /* Déplacer le texte de 10px */
+    }
+}
+.task-card:hover {
+    transform: scale(1.1); /* Augmente la taille de la carte de 10% lorsqu'elle est survolée */
+    transition: transform 0.3s ease; /* Animation fluide de la transformation */
+}
+.task-completed .card-title {
+text-decoration: line-through; /* Ajoute un style de ligne barrée au titre de la carte */
+color: #999; /* Modifie la couleur pour indiquer que la tâche est accomplie */
+}
+body {
+    /* Définir la hauteur du corps sur 100% de la hauteur de la fenêtre du navigateur */
+      background-image: url("./assets/images/meetings-bg.jpg");
+      /* Centrez l'image horizontalement et verticalement */
+  }

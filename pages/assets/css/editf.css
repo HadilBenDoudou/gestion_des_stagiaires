@@ -1,0 +1,120 @@
+
+                /* Styles pour le modal */
+                .modal {
+                    display: none; /* Caché par défaut */
+                    position: fixed; /* Positionnement fixe */
+                    z-index: 1; /* Place au-dessus de tout */
+                    left: 0;
+                    top: 0;
+                    width: 100%; /* Taille pleine largeur */
+                    height: 100%; /* Taille pleine hauteur */
+                    overflow: auto; /* Défilement */
+                    background-color: rgb(0,0,0); /* Fond noir avec opacité */
+                    background-color: rgba(0,0,0,0.4); /* Fond noir avec opacité */
+                }
+
+                /* Contenu du modal */
+                .modal-content {
+                    background-color: #fefefe;
+                    margin: 15% auto; /* 15% du haut et centré */
+                    padding: 20px;
+                    border: 1px solid #888;
+                    width: 80%; /* Largeur du contenu */
+                }
+
+
+                .email,
+.pwd{ position:relative;
+  z-index:1;
+  border-bottom:1px solid rgba(0,0,0,.1);
+  padding-left:20px;
+  font-family: 'Open Sans', sans-serif;
+  text-transform:uppercase;
+  color:#858585;
+  font-weight:lighter;
+  -webkit-transition:.5s;
+  transition:.5s;
+  display:block;
+  height:50px;
+  width:90%;
+  margin:0 auto;
+  border:none;
+  &::placeholder{
+    -webkit-transform:translateY(0px);
+      transform:translateY(0px);
+    -webkit-transition:.5s;
+      transition:.5s;
+  }
+  &:hover,
+  &:focus,
+  &:active:focus{
+    color:#ff5722;
+    outline:none;
+    border-bottom:1px solid #ff5722;
+    &::placeholder{
+      color:#ff5722;
+      position:relative;
+      -webkit-transform:translateY(-20px);
+      transform:translateY(-20px);
+      
+    }}
+
+}
+ 
+  
+
+                /* Fermer le bouton du modal */
+                .close {
+                    color: #aaa;
+                    float: right;
+                    font-size: 28px;
+                    font-weight: bold;
+                }
+                h2{
+ 
+ font-weight:lighter;
+ text-transform:uppercase;
+ color:#414141;
+ margin-left: 100px;
+}
+
+                .close:hover,
+                .close:focus {
+                    color: black;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+                    
+                 /* Style pour les boutons de la modal */
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+                
+                /* Style pour le bouton de confirmation de la modal */
+        .modal-confirm3 {
+            background-color:  #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+           
+        }
+
+        .modal-close {
+            background-color: #ccc;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 200px;
+        }
+
+                .modal-close:hover{
+                    background-color: red;
+                }
+          

@@ -1,0 +1,348 @@
+<?php
+session_start();
+
+// Vérifie si l'utilisateur est connecté
+if (!isset($_SESSION['user']['iduser'])) {
+    // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
+    header("Location: login.php");
+    exit;
+}
+
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "gestion_stag";
+
+// Récupère l'ID de l'utilisateur connecté depuis la session
+$userId = $_SESSION['user']['iduser'];
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Récupère les utilisateurs, excluant l'utilisateur connecté
+    $stmt = $conn->prepare("SELECT * FROM utilisateur WHERE iduser != :userid");
+    $stmt->bindParam(':userid', $userId);
+    $stmt->execute();
+    $utilisateurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Vérifie si un utilisateur est sélectionné
+    $selectedUserId = isset($_GET['idUser']) ? $_GET['idUser'] : null;
+
+    // Récupère les messages si un utilisateur est sélectionné
+    if ($selectedUserId) {
+        // Récupère les messages reçus et envoyés par l'utilisateur connecté avec les détails des expéditeurs et des destinataires
+        $stmt = $conn->prepare("SELECT m.*, s.login AS sender_login, r.login AS receiver_login FROM messages m LEFT JOIN utilisateur s ON m.sender_id = s.iduser LEFT JOIN utilisateur r ON m.receiver_id = r.iduser WHERE (sender_id = :userid AND receiver_id = :selectedUserId) OR (sender_id = :selectedUserId AND receiver_id = :userid) ORDER BY timestamp ASC");
+        $stmt->bindParam(':userid', $userId);
+        $stmt->bindParam(':selectedUserId', $selectedUserId);
+        $stmt->execute();
+        $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+} catch(PDOException $e) {
+    echo "Erreur de connexion à la base de données: " . $e->getMessage();
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Messages</title>
+    <!-- Ajoutez vos feuilles de style et scripts ici -->
+</head>
+<body>
+    <h1>Messages</h1>
+    <div>
+        <!-- Afficher la liste des utilisateurs -->
+        <h2>Liste des Utilisateurs</h2>
+        <ul>
+            <?php foreach ($utilisateurs as $user): ?>
+                <li><a href="?idUser=<?= $user['iduser'] ?>"><?= htmlspecialchars($user['login']) ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <div>
+        <!-- Afficher les messages avec l'utilisateur sélectionné -->
+        <?php if ($selectedUserId && isset($messages)): ?>
+            <h2>Conversation avec <?= htmlspecialchars($selectedUserId) ?></h2>
+            <ul>
+                <?php foreach ($messages as $message): ?>
+                    <li>
+                        <?= htmlspecialchars($message['timestamp']) ?> -
+                        <?php if ($message['sender_id'] == $userId): ?>
+                            Moi: <?= htmlspecialchars($message['message_text']) ?>
+                        <?php else: ?>
+                            <?= htmlspecialchars($selectedUserId) ?>: <?= htmlspecialchars($message['message_text']) ?>
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+
+            <!-- Formulaire pour répondre aux messages -->
+            <h3>Répondre au message :</h3>
+            <form action="repondre.php" method="post">
+                <input type="hidden" name="receiverId" value="<?= htmlspecialchars($selectedUserId) ?>">
+                <textarea name="replyMessage" placeholder="Votre réponse ici" rows="4" cols="50"></textarea><br>
+                <input type="submit" value="Envoyer">
+            </form>
+        <?php endif; 
+        
+        ?>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+session_start();
+
+// Vérifie si l'utilisateur est connecté
+if (!isset($_SESSION['user']['iduser'])) {
+    // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
+    header("Location: login.php");
+    exit;
+}
+
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "gestion_stag";
+
+// Récupère l'ID de l'utilisateur connecté depuis la session
+$userId = $_SESSION['user']['iduser'];
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Récupère les utilisateurs, excluant l'utilisateur connecté
+    $stmt = $conn->prepare("SELECT * FROM utilisateur WHERE iduser != :userid");
+    $stmt->bindParam(':userid', $userId);
+    $stmt->execute();
+    $utilisateurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Vérifie si un utilisateur est sélectionné
+    $selectedUserId = isset($_GET['idUser']) ? $_GET['idUser'] : null;
+
+    // Récupère les messages si un utilisateur est sélectionné
+    if ($selectedUserId) {
+        // Récupère les messages reçus et envoyés par l'utilisateur connecté avec les détails des expéditeurs et des destinataires
+        $stmt = $conn->prepare("SELECT m.*, s.login AS sender_login, r.login AS receiver_login FROM messages m LEFT JOIN utilisateur s ON m.sender_id = s.iduser LEFT JOIN utilisateur r ON m.receiver_id = r.iduser WHERE (sender_id = :userid AND receiver_id = :selectedUserId) OR (sender_id = :selectedUserId AND receiver_id = :userid) ORDER BY timestamp ASC");
+        $stmt->bindParam(':userid', $userId);
+        $stmt->bindParam(':selectedUserId', $selectedUserId);
+        $stmt->execute();
+        $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+} catch(PDOException $e) {
+    echo "Erreur de connexion à la base de données: " . $e->getMessage();
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Messaging App UI with Dark Mode</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="../pages/messaging/dist/style.css">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="app">
+ <div class="header">
+
+ 
+  <div class="user-settings">
+  
+   
+  </div>
+ 
+  <div class="search-bar">
+   <input type="text" placeholder="Rechercher..." />
+  </div>
+  <div class="user-settings">
+   <!-- Icônes de paramètres utilisateur ici -->
+  </div>
+ </div>
+ <div class="wrapper">
+  <div class="conversation-area">
+  <?php
+
+
+foreach ($utilisateurs as $user): ?>
+    <div class="msg" data-userid="<?= $user['iduser'] ?>">
+        <img class="msg-profile" src="../pages/messaging/dist/image2.png" alt="" data-userid="<?= $user['iduser'] ?>"/>
+        <div class="msg-detail">
+        <a href="?idUser=<?= $user['iduser'] ?>"><?= htmlspecialchars($user['login']) ?></a>
+            <div class="msg-content">
+                <span class="msg-message"><?= $user['email'] ?></span>
+                <span class="msg-date"><?= $user['role'] ?></span>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+
+   <button class="add"></button>
+   <div class="overlay"></div>
+  </div>
+  <div class="chat-area">
+   <div class="chat-area-header">
+    <div class="chat-area-title">CodePen Group</div>
+    <div class="chat-area-group">
+     <!-- Ici, vous pouvez afficher des informations sur le groupe -->
+    </div>
+   </div>
+ <!-- Dans la section chat-area-main -->
+ <div>
+<div class="chat-area-main">
+<?php if ($selectedUserId && isset($messages)): ?>
+            <h2>Conversation avec <?= htmlspecialchars($selectedUserId) ?></h2>
+            <ul>
+    <div class="chat-messages">
+        <ul class="messages">
+        <?php foreach ($messages as $message): ?>
+                    
+            <li class="message <?=($message['sender_id'] == $userId) ? 'outgoing' : 'incoming' ?>">
+                <div class="message-content"><?= htmlspecialchars($message['message_text']) ?></div>
+                <div class="message-time"><?= $message['timestamp'] ?></div>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <?php endif; ?>
+</div>
+
+<div class="chat-area-footer">
+    <form action="repondre.php" method="post" class="message-form">
+        <input type="hidden" name="receiverId" value="<?= htmlspecialchars($selectedUserId) ?>">
+        <input type="text" name="replyMessage" placeholder="Entrez votre message ici">
+        <button type="submit">Envoyer</button>
+    </form>
+</div>
+ </div>
+  <div class="detail-area">
+   <!-- Détails de l'utilisateur sélectionné ici -->
+  </div>
+ </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Lorsque l'utilisateur clique sur un utilisateur
+    $('.msg').click(function() {
+    var userId = $(this).data('userid'); // Ajoutez un point après 'this' pour accéder à la méthode data()
+    window.location.href = "index.php?idUser=" + userId;
+});
+
+    function scrollToBottom() {
+        var chatArea = $('.chat-area-main');
+        chatArea.scrollTop(chatArea.prop("scrollHeight"));
+    }
+
+    // Appel de la fonction de défilement automatique au chargement de la page
+    scrollToBottom();
+
+    // Faire défiler vers le bas lorsqu'un nouveau message est envoyé
+    $("form").submit(function() {
+        scrollToBottom();
+    });
+});
+
+</script>
+</body>
+</html>
+
+<style>
+    .message-content {
+  color: #333;
+}
+    /* Style de base pour les liens */
+    a {
+    color: black; /* Couleur du texte du lien */
+    text-decoration: underline; /* Soulignement du lien */
+}
+
+/* Style pour les liens avec la classe 'msg-username' */
+.msg-username {
+    color: #333; /* Couleur du texte du lien */
+    text-decoration: none; /* Aucun soulignement */
+    font-weight: bold; /* Police en gras */
+}
+
+.msg-username:hover {
+    text-decoration: underline; /* Soulignement au survol */
+}
+    /* Dans votre fichier CSS */
+.chat-area-main {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.chat-messages {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.message {
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    max-width: 70%;
+}
+
+.incoming {
+    background-color: #0086ff;
+    align-self: flex-start;
+}
+
+.outgoing {
+    background-color: #e3e5e6;
+    align-self: flex-end;
+}
+
+.message-content {
+    word-wrap: break-word;
+}
+
+.message-time {
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
+}
+.message-form {
+    display: flex;
+}
+
+.message-form input[type="text"] {
+    flex: 1;
+    margin-right: 5px; /* Ajoute un espacement entre l'input et le bouton */
+}
+
+.message-form button {
+    flex-shrink: 0; /* Empêche le bouton de rétrécir pour s'adapter */
+}
+
+
+</style>
+
+
+
+

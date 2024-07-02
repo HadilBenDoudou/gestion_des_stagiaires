@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+#btn{
+  padding: 25px 30px;
+  background-color: #050801;
+  color: #03e9f4;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  letter-spacing: 4px;
+  overflow: hidden;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+
+          
+img {
+    height: 300px; /* Set your preferred height */
+    width: 410px; /* Maintain aspect ratio */
+  }
+  /* styles.css */
+
+/* styles.css */
+
+/* Input field */
+.custom-input {
+  width: 400px;
+  background-color: #5a5b5c;
+  border: 1px solid #5a5b5c;
+  color: white;
+  margin-left: 400px;
+}
+
+
+/* styles.css */
+
+/* Label */
+.custom-label {
+  color: white;
+  margin-left: 400px;
+}
+
+/* Select dropdown */
+.custom-select {
+  color: #6c757d;
+  width: 400px;
+  background-color: #5a5b5c;
+  border: 1px solid #5a5b5c;
+  margin-left: 400px;
+}
+/* styles.css */
+
+/* Button */
+.custom-button {
+  margin-bottom: 100px;
+  margin-top: 10px;
+  padding-right: 30px;
+  background-color: #336d57;
+  margin-left: 400px;
+  border: none;
+  border-radius: 50px;
+  color: white;
+}
+
+/* Button hover effect */
+.custom-button:hover {
+  background-color: #2f5a48; /* Darker green on hover */
+}
+

@@ -1,0 +1,355 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #000;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 40px;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.task-list {
+    max-width: 800px;
+    margin: 20px auto;
+    margin-right:410px;
+}
+
+.card {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.card-text {
+    margin-bottom: 10px;
+}
+
+.btn {
+    margin-right: 10px;
+}
+
+.loading {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.rotation {
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.completed {
+text-decoration: line-through;
+}
+
+.task-checkbox {
+float: right;
+}
+    /* Style pour l'arrière-plan de la modal */
+    .modal-background {
+        display: none; /* Caché par défaut */
+        position: fixed; /* Positionnement fixe pour qu'il reste au-dessus du contenu */
+        z-index: 1; /* Mettez-le au-dessus de tout le reste */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* Active le défilement si nécessaire */
+        background-color: rgba(0,0,0,0.4); /* Fond semi-transparent */
+        padding-top: 60px; /* Espace pour le contenu de la modal */
+    }
+    
+    /* Style pour la modal elle-même */
+    .modal-background form {
+        background-color: #fefefe;
+        margin: 5% auto; /* Centrage vertical et horizontal */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Largeur de la modal */
+        border-radius: 10px;
+    }
+    
+    /* Style pour le titre de la modal */
+    .modal-background h1 {
+        text-align: center;
+    }
+    
+    /* Style pour les étiquettes et les entrées de formulaire */
+    .modal-background form label {
+        display: block; /* Afficher chaque étiquette sur une ligne séparée */
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    
+    .modal-background form input[type="text"],
+    .modal-background form textarea,
+    .modal-background form select {
+        width: calc(100% - 20px); /* Largeur de l'entrée moins la marge */
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box; /* Inclure la bordure et le rembourrage dans la largeur */
+    }
+    
+    /* Style pour le bouton Ajouter la tâche */
+    .modal-background form button[type="submit"] {
+        background-color: #3f4448;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+        margin-left: calc(50% - 100px);
+         /* Centrage horizontal */
+    }
+    
+    /* Style pour le bouton Ajouter la tâche au survol */
+    .modal-background form button[type="submit"]:hover {
+        background-color: #333;
+    }
+    .completed-task {
+        text-decoration: line-through;
+    }
+      /* Style pour l'arrière-plan de la modal */
+.modal-background {
+    display: none; /* Caché par défaut */
+    position: fixed; /* Positionnement fixe pour qu'il reste au-dessus du contenu */
+    z-index: 1; /* Mettez-le au-dessus de tout le reste */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Active le défilement si nécessaire */
+    background-color: rgba(0,0,0,0.4); /* Fond semi-transparent */
+    padding-top: 60px; /* Espace pour le contenu de la modal */
+}
+
+/* Style pour la modal elle-même */
+.modal-background form {
+    background-color: #fefefe;
+    margin: 5% auto; /* Centrage vertical et horizontal */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Largeur de la modal */
+    border-radius: 10px;
+}
+
+/* Style pour le titre de la modal */
+.modal-background h1 {
+    text-align: center;
+}
+
+/* Style pour les étiquettes et les entrées de formulaire */
+.modal-background form label {
+    display: block; /* Afficher chaque étiquette sur une ligne séparée */
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.modal-background form input[type="text"],
+.modal-background form textarea,
+.modal-background form select {
+    width: calc(100% - 20px); /* Largeur de l'entrée moins la marge */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Inclure la bordure et le rembourrage dans la largeur */
+}
+
+/* Style pour le bouton Ajouter la tâche */
+.modal-background form button[type="submit"] {
+    background-color: #3f4448;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    margin-left: calc(50% - 100px);
+     /* Centrage horizontal */
+}
+
+/* Style pour le bouton Ajouter la tâche au survol */
+.modal-background form button[type="submit"]:hover {
+    background-color: #333;
+}    
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #000;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 40px;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.task-list {
+    max-width: 800px;
+    margin: 20px auto;
+    margin-right:410px;
+}
+
+.card {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.card-text {
+    margin-bottom: 10px;
+}
+
+.btn {
+    margin-right: 10px;
+}
+
+.loading {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.rotation {
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.completed {
+text-decoration: line-through;
+}
+
+.task-checkbox {
+float: right;
+}
+.task-checkbox{
+    width: 18px;
+height: 18px;
+}
+.completed-task {
+    text-decoration: line-through;
+}

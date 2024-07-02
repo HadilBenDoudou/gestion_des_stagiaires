@@ -1,0 +1,16 @@
+{
+    "name": "poste/generate",
+    "autoload": {
+        "psr-4": {
+            "Poste\\Generate\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "hadil"
+        }
+    ],
+    "require": {
+        "dompdf/dompdf": "^2.0"
+    }
+}

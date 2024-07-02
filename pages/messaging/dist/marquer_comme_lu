@@ -1,0 +1,37 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user']['iduser'])) {
+    // Rediriger l'utilisateur vers la page de connexion s'il n'est pas connecté
+    header("Location: login.php");
+    exit;
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['messageId'])) {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "gestion_stag";
+
+    $userId = $_SESSION['user']['iduser'];
+    $messageId = $_POST['messageId'];
+
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Mettre à jour l'état de lecture du message dans la base de données
+        $stmt = $conn->prepare("UPDATE messages SET is_read = TRUE WHERE message_id = :messageId AND receiver_id = :userId");
+        $stmt->bindParam(':messageId', $messageId);
+        $stmt->bindParam(':userId', $userId);
+        $stmt->execute();
+
+        echo "Le message a été marqué comme lu avec succès.";
+    } catch (PDOException $e) {
+        echo "Erreur lors de la mise à jour de l'état de lecture du message: " . $e->getMessage();
+    }
+} else {
+    // Rediriger l'utilisateur vers une page appropriée en cas de problème
+    header("Location: error.php");
+    exit;
+}

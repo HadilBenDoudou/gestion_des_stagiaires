@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<!-- saved from url=(0104)http://localhost:8069/web?debug=1#action=559&model=res.config.settings&view_type=form&cids=1&menu_id=381 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Odoo - Paramètres</title>
+        <link type="image/x-icon" rel="shortcut icon" href="http://localhost:8069/web/static/img/favicon.ico">
+        <script id="web.layout.odooscript" type="text/javascript">
+            var odoo = {
+                csrf_token: "cfc71e2190c312cf8ff2f72257cbf2a289908c88o1736949700",
+                debug: "1",
+            };
+        </script>
+        
+                <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+                <meta name="theme-color" content="#71639e">
+                <link rel="manifest" href="http://localhost:8069/web/manifest.webmanifest" crossorigin="use-credentials">
+                <link rel="apple-touch-icon" href="http://localhost:8069/web/static/img/odoo-icon-ios.png">
+                <script type="text/javascript">
+                    // Block to avoid leaking variables in the script scope
+                    {
+                        odoo.__session_info__ = {"uid": 2, "is_system": true, "is_admin": true, "is_internal_user": true, "user_context": {"lang": "fr_BE", "tz": "Africa/Tunis", "uid": 2}, "db": "database", "user_settings": {"id": 1, "user_id": {"id": 2}, "is_discuss_sidebar_category_channel_open": true, "is_discuss_sidebar_category_chat_open": true, "push_to_talk_key": false, "use_push_to_talk": false, "voice_active_duration": 0, "volume_settings_ids": [["ADD", []]]}, "server_version": "17.0-20240115", "server_version_info": [17, 0, 0, "final", 0, ""], "support_url": "https://www.odoo.com/buy", "name": "Mitchell Admin", "username": "bendoudouhadil@gmail.com", "partner_display_name": "YourCompany, Mitchell Admin", "partner_id": 3, "web.base.url": "http://localhost:8069", "active_ids_limit": 20000, "profile_session": null, "profile_collectors": null, "profile_params": null, "max_file_upload_size": 134217728, "home_action_id": false, "cache_hashes": {"translations": "b6212e3bf6b2a4ad0cf6e669ad9349f067392e3d", "load_menus": "c8c69feb38339851905f1531a78cdedd0acc058967bbb255d64c68ff8fd6f406"}, "currencies": {"130": {"symbol": "DT", "position": "after", "digits": [69, 3]}, "1": {"symbol": "$", "position": "before", "digits": [69, 2]}}, "bundle_params": {"lang": "fr_BE", "debug": "1"}, "user_companies": {"current_company": 1, "allowed_companies": {"2": {"id": 2, "name": "My Company (Chicago)", "sequence": 10, "child_ids": [], "parent_id": false}, "1": {"id": 1, "name": "My Company (San Francisco)", "sequence": 0, "child_ids": [], "parent_id": false}}, "disallowed_ancestor_companies": {}}, "show_effect": true, "display_switch_company_menu": true, "user_id": [2], "max_time_between_keys_in_ms": 100, "web_tours": [], "tour_disable": true, "notification_type": "email", "odoobot_initialized": true, "iap_company_enrich": false, "is_quick_edit_mode_enabled": false};
+                        const { user_context,  cache_hashes } = odoo.__session_info__;
+                        const lang = new URLSearchParams(document.location.search).get("lang");
+                        let menuURL = `/web/webclient/load_menus/${cache_hashes.load_menus}`;
+                        if (lang) {
+                            user_context.lang = lang;
+                            menuURL += `?lang=${lang}`
+                        }
+                        odoo.reloadMenus = () => fetch(menuURL).then(res => res.json());
+                        odoo.loadMenusPromise = odoo.reloadMenus();
+                        // Prefetch translations to speedup webclient. This is done in JS because link rel="prefetch"
+                        // is not yet supported on safari.
+                        fetch(`/web/webclient/translations/${cache_hashes.translations}?lang=${user_context.lang}`);
+                    }
+                </script>
+                    <link type="text/css" rel="stylesheet" href="./Odoo - Paramètres_files/web.assets_web.min.css">
+        <script type="text/javascript" src="./Odoo - Paramètres_files/web.assets_web.min.js.téléchargement" onerror="__odooAssetError=1"></script>
+            
+    <style type="text/css">@font-face { font-family: Roboto; src: url("chrome-extension://mcgbeeipkmelnpldkobichboakdfaeon/css/Roboto-Regular.ttf"); }</style></head>
+    <body class="o_web_client o_debug">
+        
+        
+    
+<script>
+		function returnCommentSymbol(language = "javascript") {
+			const languageObject = {
+				bat: "@REM",
+				c: "//",
+				csharp: "//",
+				cpp: "//",
+				closure: ";;",
+				coffeescript: "#",
+				dockercompose: "#",
+				css: "/*DELIMITER*/",
+				"cuda-cpp": "//",
+				dart: "//",
+				diff: "#",
+				dockerfile: "#",
+				fsharp: "//",
+				"git-commit": "//",
+				"git-rebase": "#",
+				go: "//",
+				groovy: "//",
+				handlebars: "{{!--DELIMITER--}}",
+				hlsl: "//",
+				html: "<!--DELIMITER-->",
+				ignore: "#",
+				ini: ";",
+				java: "//",
+				javascript: "//",
+				javascriptreact: "//",
+				json: "//",
+				jsonc: "//",
+				julia: "#",
+				latex: "%",
+				less: "//",
+				lua: "--",
+				makefile: "#",
+				markdown: "<!--DELIMITER-->",
+				"objective-c": "//",
+				"objective-cpp": "//",
+				perl: "#",
+				perl6: "#",
+				php: "<!--DELIMITER-->",
+				powershell: "#",
+				properties: ";",
+				jade: "//-",
+				python: "#",
+				r: "#",
+				razor: "<!--DELIMITER-->",
+				restructuredtext: "..",
+				ruby: "#",
+				rust: "//",
+				scss: "//",
+				shaderlab: "//",
+				shellscript: "#",
+				sql: "--",
+				svg: "<!--DELIMITER-->",
+				swift: "//",
+				tex: "%",
+				typescript: "//",
+				typescriptreact: "//",
+				vb: "'",
+				xml: "<!--DELIMITER-->",
+				xsl: "<!--DELIMITER-->",
+				yaml: "#"
+			}
+			if(!languageObject[language]){
+				return languageObject["python"].split("DELIMITER")
+			}
+			return languageObject[language].split("DELIMITER")
+		}
+		var savedChPos = 0
+		var returnedSuggestion = ''
+		let editor, doc, cursor, line, pos
+		pos = {line: 0, ch: 0}
+		var suggestionsStatus = false
+		var docLang = "python"
+		var suggestionDisplayed = false
+		var isReturningSuggestion = false
+		document.addEventListener("keydown", (event) => {
+		setTimeout(()=>{
+			editor = event.target.closest('.CodeMirror');
+			if (editor){
+				const codeEditor = editor.CodeMirror
+				if(!editor.classList.contains("added-tab-function")){
+					editor.classList.add("added-tab-function")
+					codeEditor.removeKeyMap("Tab")
+					codeEditor.setOption("extraKeys", {Tab: (cm)=>{
+
+						if(returnedSuggestion){
+							acceptTab(returnedSuggestion)
+						}
+						else{
+							cm.execCommand("defaultTab")
+						}
+					}})
+				}
+				doc = editor.CodeMirror.getDoc()
+				cursor = doc.getCursor()
+				line = doc.getLine(cursor.line)
+				pos = {line: cursor.line, ch: line.length}
+
+				if(cursor.ch > 0){
+					savedChPos = cursor.ch
+				}
+
+				const fileLang = doc.getMode().name
+				docLang = fileLang
+				const commentSymbol = returnCommentSymbol(fileLang)
+				if (event.key == "?"){
+					var lastLine = line
+					lastLine = lastLine.slice(0, savedChPos - 1)
+
+					if(lastLine.trim().startsWith(commentSymbol[0])){
+						if(fileLang !== "null"){
+							lastLine += " "+ fileLang
+						}
+						
+						lastLine = lastLine.split(commentSymbol[0])[1]
+						window.postMessage({source: 'getQuery', payload: { data: lastLine } } )
+						isReturningSuggestion = true
+						displayGrey("\nBlackbox loading...")
+					}
+				}else if(event.key === "Enter" && suggestionsStatus && !isReturningSuggestion){
+					var query = doc.getRange({ line: Math.max(0,cursor.line-50), ch: 0 }, { line: cursor.line, ch: line.length })
+					window.postMessage({source: 'getSuggestion', payload: { data: query, language: docLang, cursorPos: pos } } )
+					displayGrey("Blackbox loading...")
+				}else if(event.key === "ArrowRight" && returnedSuggestion){
+					acceptTab(returnedSuggestion)
+				}else if(event.key === "Enter" && isReturningSuggestion){
+					displayGrey("\nBlackbox loading...")
+				}else if(event.key === "Escape"){
+					displayGrey("")
+				}
+			}
+		}, 0)
+		})
+
+		function acceptTab(text){
+		if (suggestionDisplayed){
+			displayGrey("")
+			doc.replaceRange(text, pos)
+			returnedSuggestion = ""
+			updateSuggestionStatus(false)
+		}
+		}
+		function acceptSuggestion(text){
+			displayGrey("")
+			doc.replaceRange(text, pos)
+			returnedSuggestion = ""
+			updateSuggestionStatus(false)
+		}
+		function displayGrey(text){
+			if(!text){
+				document.querySelector(".blackbox-suggestion").remove()
+				return
+			}
+			var el = document.querySelector(".blackbox-suggestion")
+			if(!el){
+				el = document.createElement('span')
+				el.classList.add("blackbox-suggestion")
+				el.style = 'color:grey'
+				el.innerText = text
+			}
+			else{
+				el.innerText = text
+			}
+			
+			var lineIndex = pos.line;
+			editor.getElementsByClassName('CodeMirror-line')[lineIndex].appendChild(el)
+		}
+		function updateSuggestionStatus(s){
+			suggestionDisplayed = s
+			window.postMessage({source: 'updateSuggestionStatus', status: suggestionDisplayed, suggestion: returnedSuggestion})
+		}
+		window.addEventListener('message', (event)=>{
+		if (event.source !== window ) return
+		if (event.data.source == 'return'){
+			isReturningSuggestion = false
+			const formattedCode = formatCode(event.data.payload.data)
+			returnedSuggestion = formattedCode
+			displayGrey(formattedCode)
+			updateSuggestionStatus(true)
+		}
+		if(event.data.source == 'suggestReturn'){
+			const prePos = event.data.payload.cursorPos
+			if(pos.line == prePos.line && pos.ch == prePos.ch){
+				returnedSuggestion = event.data.payload.data
+				displayGrey(event.data.payload.data)
+				updateSuggestionStatus(true)
+			}
+			else{
+				displayGrey()
+			}
+		}
+		if(event.data.source == 'codeSearchReturn'){
+			isReturningSuggestion = false
+			displayGrey()
+		}
+		if(event.data.source == 'suggestionsStatus'){
+			suggestionsStatus = event.data.payload.enabled
+		}
+		if(event.data.source == 'acceptSuggestion'){
+			
+			acceptSuggestion(event.data.suggestion)
+		}
+		})
+		document.addEventListener("keyup", function(){
+			returnedSuggestion = ""
+			updateSuggestionStatus(false)
+		})
+		function formatCode(data) {
+			if (Array.isArray(data)) {
+				var finalCode = ""
+				var pairs = []
+		
+				const commentSymbol = returnCommentSymbol(docLang)
+				data.forEach((codeArr, idx) => {
+					const code = codeArr[0]
+					var desc = codeArr[1]
+					const descArr = desc.split("\n")
+					var finalDesc = ""
+					descArr.forEach((descLine, idx) => {
+						const whiteSpace = descLine.search(/\S/)
+						if (commentSymbol.length < 2 || idx === 0) {
+							finalDesc += insert(descLine, whiteSpace, commentSymbol[0])
+						}
+						if (commentSymbol.length > 1 && idx === descArr.length - 1) {
+							finalDesc = finalDesc + commentSymbol[1] + "\n"
+						}
+					})
+		
+					finalCode += finalDesc + "\n\n" + code
+					pairs.push(finalCode)
+				})
+				return "\n"+pairs.join("\n")
+			}
+		
+			return "\n"+data
+		}
+		
+		function insert(str, index, value) {
+			return str.substr(0, index) + value + str.substr(index)
+		}
+	</script><header class="o_navbar"><nav class="o_main_navbar" data-command-category="disabled"><div class="o-dropdown dropdown o_navbar_apps_menu o-dropdown--no-caret"><button type="button" class="dropdown-toggle" title="Home Menu" data-hotkey="h" tabindex="0" aria-expanded="false"><i class="oi oi-apps"></i></button></div><a class="dropdown-item o_menu_brand d-none d-md-flex" role="menuitem" tabindex="0" href="http://localhost:8069/web?debug=1#menu_id=365&amp;action=552" data-menu-xmlid="purchase.menu_purchase_root" data-section="365">Achats</a><div class="o_menu_sections d-none d-md-flex flex-grow-1 flex-shrink-1 w-0" role="menu"><div class="o-dropdown dropdown o-dropdown--no-caret"><button type="button" class="dropdown-toggle" data-hotkey="1" tabindex="0" aria-expanded="false" data-menu-xmlid="purchase.menu_procurement_management"><span data-section="366">Commandes</span></button></div><div class="o-dropdown dropdown o-dropdown--no-caret"><button type="button" class="dropdown-toggle" data-hotkey="2" tabindex="0" aria-expanded="false" data-menu-xmlid="purchase.menu_purchase_products"><span data-section="376">Produits</span></button></div><div class="o-dropdown dropdown o-dropdown--no-caret"><button type="button" class="dropdown-toggle" data-hotkey="3" tabindex="0" aria-expanded="false" data-menu-xmlid="purchase.purchase_report_main"><span data-section="382">Analyse</span></button></div><div class="o-dropdown dropdown o-dropdown--no-caret show"><button type="button" class="dropdown-toggle" data-hotkey="4" tabindex="0" aria-expanded="true" data-menu-xmlid="purchase.menu_purchase_config"><span data-section="368">Configuration</span></button><div role="menu" class="o-dropdown--menu dropdown-menu d-block" style="position: fixed; top: 46px; left: 339.807px;"><a class="dropdown-item" role="menuitem" tabindex="0" href="http://localhost:8069/web?debug=1#menu_id=381&amp;action=559" data-menu-xmlid="purchase.menu_purchase_general_settings" data-section="381" style="padding-left: 20px;">Paramètres</a><a class="dropdown-item" role="menuitem" tabindex="0" href="http://localhost:8069/web?debug=1#menu_id=369&amp;action=177" data-menu-xmlid="purchase.menu_product_pricelist_action2_purchase" data-section="369" style="padding-left: 20px;">Listes de prix du fournisseur</a><div class="dropdown-menu_group dropdown-header" style="padding-left: 20px;">Produits</div><a class="dropdown-item o_dropdown_menu_group_entry" role="menuitem" tabindex="0" href="http://localhost:8069/web?debug=1#menu_id=371&amp;action=172" data-menu-xmlid="purchase.menu_product_attribute_action" data-section="371" style="padding-left: 32px;">Attributs de produits</a><a class="dropdown-item o_dropdown_menu_group_entry" role="menuitem" tabindex="0" href="http://localhost:8069/web?debug=1#menu_id=372&amp;action=173" data-menu-xmlid="purchase.menu_product_category_config_purchase" data-section="372" style="padding-left: 32px;">Catégories de produits</a></div></div></div><div class="o_menu_systray d-flex flex-shrink-0 ms-auto" role="menu"><div></div><div class="o-dropdown dropdown o_debug_manager o-dropdown--no-caret"><button type="button" class="dropdown-toggle o-dropdown--narrow" tabindex="0" aria-expanded="false"><i class="fa fa-bug" role="img" aria-label="Open developer tools"></i></button></div><div></div><div class="dropdown"></div><div></div><div class="o-dropdown dropdown o-mail-DiscussSystray-class o-dropdown--no-caret"><button type="button" class="dropdown-toggle" tabindex="0" aria-expanded="false"><i class="fa fa-lg fa-comments" role="img" aria-label="Messages"></i><span class="o-mail-MessagingMenu-counter badge rounded-pill">6</span></button></div><div></div><div class="o-dropdown dropdown o-mail-DiscussSystray-class o-dropdown--no-caret"><button type="button" class="dropdown-toggle" tabindex="0" aria-expanded="false"><i class="fa fa-lg fa-clock-o" role="img" aria-label="Activities"></i><span class="o-mail-ActivityMenu-counter badge rounded-pill">7</span></button></div><div></div><div class="o-dropdown dropdown o_switch_company_menu d-none d-md-block o-dropdown--no-caret"><button type="button" class="dropdown-toggle" tabindex="0" aria-expanded="false"><i class="fa fa-building d-lg-none"></i><span class="oe_topbar_name d-none d-lg-block">My Company (San Francisco)</span></button></div><div></div><div><button class="o_mobile_menu_toggle o_nav_entry o-no-caret d-md-none border-0 pe-3" title="Basculer le menu" aria-label="Toggle menu"><i class="oi oi-panel-right"></i></button></div><div></div><div class="o-dropdown dropdown o_user_menu d-none d-md-block pe-0 o-dropdown--no-caret"><button type="button" class="dropdown-toggle py-1 py-lg-0" tabindex="0" aria-expanded="false"><img class="o_avatar o_user_avatar rounded" alt="Utilisateur" src="./Odoo - Paramètres_files/Mitchell Admin.png"><small class="oe_topbar_name d-none ms-2 text-start smaller lh-1 text-truncate d-lg-inline-block" style="max-width: 200px">Mitchell Admin<mark class="d-block font-monospace text-truncate"><i class="fa fa-database oi-small me-1"></i>database</mark></small></button></div></div></nav></header><div class="o_action_manager"><div class="o-settings-form-view o_field_highlight o_form_view o_base_settings_view oe_form_configuration o_view_controller o_action"><div class="o_form_view_container"><div class="o_control_panel d-flex flex-column gap-3 gap-lg-1 px-3 pt-2 pb-3" data-command-category="actions"><div class="o_control_panel_main d-flex flex-wrap flex-lg-nowrap justify-content-between align-items-lg-start gap-3 flex-grow-1"><div class="o_control_panel_breadcrumbs d-flex align-items-center gap-1 order-0 h-lg-100"><div class="o_control_panel_main_buttons d-flex gap-1 d-empty-none d-print-none"><div class="d-xl-none o_control_panel_collapsed_create"><button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split o_control_panel_collapsed_create d-none" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Activer le menu déroulant</span></button><ul class="dropdown-menu o_control_panel_collapsed_create d-none"></ul></div><div class="d-none d-xl-inline-flex gap-1"></div></div><div class="o_breadcrumb d-flex gap-1 text-truncate"><div class="o_last_breadcrumb_item active d-flex fs-4 min-w-0 align-items-center"><span class="min-w-0 text-truncate">Paramètres</span></div><div class="o_control_panel_breadcrumbs_actions d-inline-flex"></div></div><div class="o_cp_buttons d-flex align-items-baseline w-100 order-first w-auto" role="toolbar" aria-label="Main actions"><div class="o_form_buttons_edit d-flex gap-1"><button type="button" class="btn btn-primary o_form_button_save" data-hotkey="s"> Enregistrer </button><button type="button" class="btn btn-secondary o_form_button_cancel" data-hotkey="j"> Ignorer </button></div></div><span class="d-none d-xl-block me-auto"></span></div><div class="o_control_panel_actions d-empty-none d-flex align-items-center justify-content-start justify-content-lg-around order-2 order-lg-1 w-100 w-lg-auto"><div class="o_cp_searchview d-flex w-100" role="search"><div class="o_searchview form-control d-flex align-items-center py-1" role="search" aria-autocomplete="list"><i class="o_searchview_icon oi oi-search me-2" role="img" aria-label="Search..." title="Rechercher…"></i><div class="o_searchview_input_container d-flex flex-grow-1 flex-wrap gap-1"><input type="text" class="o_searchview_input o_input flex-grow-1 w-auto border-0" accesskey="Q" placeholder="Rechercher…" role="searchbox"></div></div></div></div><div class="o_control_panel_navigation d-flex flex-wrap flex-md-nowrap justify-content-end gap-3 gap-lg-1 gap-xl-3 order-1 order-lg-2 flex-grow-1"></div></div></div><div class="o_content"><div class="o_form_renderer o_form_editable d-block"><div class="o_setting_container"><div class="position-sticky top-0 flex-grow-0 z-index-1"><div class="settings_tab h-100 border-end"><div class="tab" role="tab" data-key="general_settings"><div class="icon d-none d-md-block" style="background : url(&#39;/base/static/description/settings.png&#39;) no-repeat center;background-size:contain;"></div> <span class="app_name">Paramètres généraux</span></div><div class="tab" role="tab" data-key="sale_management"><div class="icon d-none d-md-block" style="background : url(&#39;/sale_management/static/description/icon.png&#39;) no-repeat center;background-size:contain;"></div> <span class="app_name">Ventes</span></div><div class="tab selected" role="tab" data-key="purchase"><div class="icon d-none d-md-block" style="background : url(&#39;/purchase/static/description/icon.png&#39;) no-repeat center;background-size:contain;"></div> <span class="app_name">Achats</span></div><div class="tab" role="tab" data-key="stock"><div class="icon d-none d-md-block" style="background : url(&#39;/stock/static/description/icon.png&#39;) no-repeat center;background-size:contain;"></div> <span class="app_name">Inventaire</span></div><div class="tab" role="tab" data-key="account"><div class="icon d-none d-md-block" style="background : url(&#39;/account/static/description/icon.png&#39;) no-repeat center;background-size:contain;"></div> <span class="app_name">Facturation</span></div><div class="tab" role="tab" data-key="project"><div class="icon d-none d-md-block" style="background : url(&#39;/project/static/description/icon.png&#39;) no-repeat center;background-size:contain;"></div> <span class="app_name">Projet</span></div><div class="tab" role="tab" data-key="mass_mailing"><div class="icon d-none d-md-block" style="background : url(&#39;/mass_mailing/static/description/icon.png&#39;) no-repeat center;background-size:contain;"></div> <span class="app_name">Email Marketing</span></div><div class="tab" role="tab" data-key="hr"><div class="icon d-none d-md-block" style="background : url(&#39;/hr/static/description/icon.png&#39;) no-repeat center;background-size:contain;"></div> <span class="app_name">Employés</span></div></div></div><div class="settings"><div class="app_settings_block" string="Achats" data-key="purchase"><h2><span searchabletext="Commandes">Commandes</span></h2><div class="row mt16 o_settings_container"><div class="o_setting_box col-12 col-lg-6 o_searchable_setting"><div class="o_setting_left_pane" data-tooltip-delay="800" data-tooltip=""><div name="po_order_approval" class="o_field_widget o_field_boolean"><div class="o-checkbox form-check d-inline-block"><input type="checkbox" class="form-check-input" id="po_order_approval_0"><label class="form-check-label" for="po_order_approval_0"></label></div></div></div><div class="o_setting_right_pane" data-tooltip-delay="800" data-tooltip=""><label class="o_form_label" for="po_order_approval_0"><span searchabletext="Approbation du bon de commande">Approbation du bon de commande</span></label><span class="fa fa-lg fa-building-o" title="Les valeurs définies ici sont propres à l&#39;entreprise."></span><div class="text-muted"><span searchabletext="Demander aux managers d&#39;approuver les commandes supérieures à un montant minimum">Demander aux managers d'approuver les commandes supérieures à un montant minimum</span></div><div class="mt16"></div></div></div><div class="o_setting_box col-12 col-lg-6 o_searchable_setting"><div class="o_setting_left_pane" data-tooltip-delay="800" data-tooltip=""><div name="lock_confirmed_po" class="o_field_widget o_field_boolean"><div class="o-checkbox form-check d-inline-block"><input type="checkbox" class="form-check-input" id="lock_confirmed_po_0"><label class="form-check-label" for="lock_confirmed_po_0"></label></div></div></div><div class="o_setting_right_pane" data-tooltip-delay="800" data-tooltip=""><label class="o_form_label" for="lock_confirmed_po_0"><span searchabletext="Verrouiller les commandes confirmées">Verrouiller les commandes confirmées</span></label><div class="text-muted"><span searchabletext="Verrouiller automatiquement les commandes confirmées pour éviter de les modifier">Verrouiller automatiquement les commandes confirmées pour éviter de les modifier</span></div><div class="mt16"></div></div></div><div class="o_setting_box col-12 col-lg-6 o_searchable_setting"><div class="o_setting_left_pane" data-tooltip-delay="800" data-tooltip=""><div name="group_warning_purchase" class="o_field_widget o_field_boolean"><div class="o-checkbox form-check d-inline-block"><input type="checkbox" class="form-check-input" id="group_warning_purchase_0"><label class="form-check-label" for="group_warning_purchase_0"></label></div></div></div><div class="o_setting_right_pane" data-tooltip-delay="800" data-tooltip=""><label class="o_form_label" for="group_warning_purchase_0"><span searchabletext="Avertissements">Avertissements</span></label><div class="text-muted"><span searchabletext="Recevoir des avertissements sur les commandes pour des produits ou fournisseur">Recevoir des avertissements sur les commandes pour des produits ou fournisseur</span></div><div class="mt16"></div></div></div><div class="o_setting_box col-12 col-lg-6 o_searchable_setting"><div class="o_setting_left_pane" data-tooltip-delay="800" data-tooltip="Les appels d&#39;offres consistent à générer des demandes de prix auprès de plusieurs fournisseurs pour un ensemble de produits donné afin de comparer les offres."><div name="module_purchase_requisition" class="o_field_widget o_field_boolean"><div class="o-checkbox form-check d-inline-block"><input type="checkbox" class="form-check-input" id="module_purchase_requisition_0"><label class="form-check-label" for="module_purchase_requisition_0"></label></div></div></div><div class="o_setting_right_pane" data-tooltip-delay="800" data-tooltip="Les appels d&#39;offres consistent à générer des demandes de prix auprès de plusieurs fournisseurs pour un ensemble de produits donné afin de comparer les offres."><label class="o_form_label" for="module_purchase_requisition_0"><span searchabletext="Conventions d&#39;achat">Conventions d'achat</span></label><a title="Documentation" class="o_doc_link me-2" target="_blank" href="https://www.odoo.com/documentation/17.0/applications/inventory_and_mrp/purchase/manage_deals/agreements.html"></a><div class="text-muted"><span searchabletext="Gérer vos conventions d&#39;achat (appels d&#39;offres, contrats-cadres)">Gérer vos conventions d'achat (appels d'offres, contrats-cadres)</span></div><div class="mt16"></div></div></div><div class="o_setting_box col-12 col-lg-6 o_searchable_setting"><div class="o_setting_left_pane" data-tooltip-delay="800" data-tooltip=""><div name="group_send_reminder" class="o_field_widget o_field_boolean"><div class="o-checkbox form-check d-inline-block"><input type="checkbox" class="form-check-input" id="group_send_reminder_0"><label class="form-check-label" for="group_send_reminder_0"></label></div></div></div><div class="o_setting_right_pane" data-tooltip-delay="800" data-tooltip=""><label class="o_form_label" for="group_send_reminder_0"><span searchabletext="Rappel de réception">Rappel de réception</span></label><div class="text-muted"><span searchabletext="Rappel automatique de la date de réception à vos fournisseurs">Rappel automatique de la date de réception à vos fournisseurs</span></div><div class="mt16"></div></div></div></div><h2><span searchabletext="Facturation">Facturation</span></h2><div class="row mt16 o_settings_container"><div class="o_setting_box col-12 col-lg-6 o_searchable_setting"><div class="o_setting_left_pane" data-tooltip-delay="800" data-tooltip="Cette valeur par défaut s&#39;applique à tout nouveau produit créé. Elle peut être modifiée dans la fiche détaillée du produit."></div><div class="o_setting_right_pane" data-tooltip-delay="800" data-tooltip="Cette valeur par défaut s&#39;applique à tout nouveau produit créé. Elle peut être modifiée dans la fiche détaillée du produit."><label class="o_form_label" for="default_purchase_method_0"><span searchabletext="Contrôle des factures">Contrôle des factures</span></label><a title="Documentation" class="o_doc_link me-2" target="_blank" href="https://www.odoo.com/documentation/17.0/applications/inventory_and_mrp/purchase/manage_deals/control_bills.html"></a><div class="text-muted"><span searchabletext="Quantités facturées par les fournisseurs">Quantités facturées par les fournisseurs</span></div><div class="mt16"><div name="default_purchase_method" class="o_field_widget o_field_radio o_light_label"><div role="radiogroup" class="o_vertical" aria-label="Contrôle des factures"><div class="form-check o_radio_item" aria-atomic="true"><input type="radio" class="form-check-input o_radio_input" name="radio_field_0" data-value="purchase" data-index="0" id="radio_field_0_purchase"><label class="form-check-label o_form_label" for="radio_field_0_purchase"><span searchabletext="Quantités commandées">Quantités commandées</span></label></div><div class="form-check o_radio_item" aria-atomic="true"><input type="radio" class="form-check-input o_radio_input" name="radio_field_0" data-value="receive" data-index="1" id="radio_field_0_receive"><label class="form-check-label o_form_label" for="radio_field_0_receive"><span searchabletext="Quantités reçues">Quantités reçues</span></label></div></div></div></div></div></div><div class="o_setting_box col-12 col-lg-6 o_searchable_setting"><div class="o_setting_left_pane" data-tooltip-delay="800" data-tooltip="Si cette option est activée, cela permet d&#39;effectuer une correspondance à 3 voies sur les factures de fournisseurs : les articles doivent être reçus pour payer la facture."><div name="module_account_3way_match" class="o_field_widget o_field_upgrade_boolean o_field_boolean"><div class="o-checkbox form-check d-inline-block"><input type="checkbox" class="form-check-input" id="module_account_3way_match_0"><label class="form-check-label" for="module_account_3way_match_0"></label></div></div></div><div class="o_setting_right_pane" data-tooltip-delay="800" data-tooltip="Si cette option est activée, cela permet d&#39;effectuer une correspondance à 3 voies sur les factures de fournisseurs : les articles doivent être reçus pour payer la facture."><label class="o_form_label" for="module_account_3way_match_0"><span searchabletext="Correspondance à trois voies">Correspondance à trois voies</span><span class="badge text-bg-primary oe_inline o_enterprise_label">Entreprise</span></label><a title="Documentation" class="o_doc_link me-2" target="_blank" href="https://www.odoo.com/documentation/17.0/applications/inventory_and_mrp/purchase/manage_deals/control_bills.html"></a><div class="text-muted"><span searchabletext="S&#39;assurer de payer uniquement les factures des marchandises commandées et reçues">S'assurer de payer uniquement les factures des marchandises commandées et reçues</span></div><div class="mt16"></div></div></div></div><h2><span searchabletext="Produits">Produits</span></h2><div class="row mt16 o_settings_container"><div class="o_setting_box col-12 col-lg-6 o_searchable_setting"><div class="o_setting_left_pane" data-tooltip-delay="800" data-tooltip=""><div name="group_product_variant" class="o_field_widget o_field_boolean"><div class="o-checkbox form-check d-inline-block"><input type="checkbox" class="form-check-input" id="group_product_variant_1"><label class="form-check-label" for="group_product_variant_1"></label></div></div></div><div class="o_setting_right_pane" data-tooltip-delay="800" data-tooltip=""><label class="o_form_label" for="group_product_variant_1"><span searchabletext="Variantes">Variantes</span></label><a title="Documentation" class="o_doc_link me-2" target="_blank" href="https://www.odoo.com/documentation/17.0/applications/sales/sales/products_prices/products/variants.html"></a><div class="text-muted"><span searchabletext="Acheter des variantes d&#39;un produit en utilisant des des attributs (taille, couleur, etc..)">Acheter des variantes d'un produit en utilisant des des attributs (taille, couleur, etc..)</span></div><div class="mt16"><div class="content-group"><div class="mt8"><button class="btn btn-link" name="172" type="action" data-tooltip-template="views.ViewButtonTooltip" data-tooltip-info="{&quot;debug&quot;:true,&quot;button&quot;:{&quot;string&quot;:&quot;Attributs&quot;,&quot;type&quot;:&quot;action&quot;,&quot;name&quot;:&quot;172&quot;},&quot;context&quot;:{&quot;module&quot;:&quot;purchase&quot;,&quot;bin_size&quot;:false,&quot;lang&quot;:&quot;fr_BE&quot;,&quot;tz&quot;:&quot;Africa/Tunis&quot;,&quot;uid&quot;:2,&quot;allowed_company_ids&quot;:[1]},&quot;model&quot;:&quot;res.config.settings&quot;}"><i class="o_button_icon oi oi-fw oi-arrow-right me-1"></i><span searchabletext="Attributs">Attributs</span></button></div></div></div></div></div><div class="o_setting_box col-12 col-lg-6 o_searchable_setting"><div class="o_setting_left_pane" data-tooltip-delay="800" data-tooltip="Si installées, les variantes de produit seront ajoutées aux bons de commande via une grille."><div name="module_purchase_product_matrix" class="o_field_widget o_field_boolean"><div class="o-checkbox form-check d-inline-block"><input type="checkbox" class="form-check-input" id="module_purchase_product_matrix_0"><label class="form-check-label" for="module_purchase_product_matrix_0"></label></div></div></div><div class="o_setting_right_pane" data-tooltip-delay="800" data-tooltip="Si installées, les variantes de produit seront ajoutées aux bons de commande via une grille."><label class="o_form_label" for="module_purchase_product_matrix_0"><span searchabletext="Grille d&#39;entrée des variantes">Grille d'entrée des variantes</span></label><div class="text-muted"><span searchabletext="Ajouter plusieurs variantes sur le bon de commande depuis une grille">Ajouter plusieurs variantes sur le bon de commande depuis une grille</span></div><div class="mt16"></div></div></div><div class="o_setting_box col-12 col-lg-6 o_searchable_setting"><div class="o_setting_left_pane" data-tooltip-delay="800" data-tooltip="Possibilité de sélectionner un type de colis dans les bons de commande et de forcer une quantité qui est un multiple du nombre d&#39;unités par colis."><div name="group_stock_packaging" class="o_field_widget o_field_boolean"><div class="o-checkbox form-check d-inline-block"><input type="checkbox" class="form-check-input" id="group_stock_packaging_1"><label class="form-check-label" for="group_stock_packaging_1"></label></div></div></div><div class="o_setting_right_pane" data-tooltip-delay="800" data-tooltip="Possibilité de sélectionner un type de colis dans les bons de commande et de forcer une quantité qui est un multiple du nombre d&#39;unités par colis."><label class="o_form_label" for="group_stock_packaging_1"><span searchabletext="Conditionnements de produits">Conditionnements de produits</span></label><div class="text-muted"><span searchabletext="Acheter les produits par multiples du # d&#39;unités par colis">Acheter les produits par multiples du # d'unités par colis</span></div><div class="mt16"></div></div></div><div class="o_setting_box col-12 col-lg-6 o_searchable_setting"><div class="o_setting_left_pane" data-tooltip-delay="800" data-tooltip=""><div name="group_uom" class="o_field_widget o_field_boolean"><div class="o-checkbox form-check d-inline-block"><input type="checkbox" class="form-check-input" id="group_uom_1"><label class="form-check-label" for="group_uom_1"></label></div></div></div><div class="o_setting_right_pane" data-tooltip-delay="800" data-tooltip=""><label class="o_form_label" for="group_uom_1"><span searchabletext="Unités de mesure">Unités de mesure</span></label><a title="Documentation" class="o_doc_link me-2" target="_blank" href="https://www.odoo.com/documentation/17.0/applications/inventory_and_mrp/inventory/management/products/uom.html"></a><div class="text-muted"><span searchabletext="Acheter et vendre des produits dans des unités de mesure différentes">Acheter et vendre des produits dans des unités de mesure différentes</span></div><div class="mt16"><div class="content-group"></div></div></div></div></div><h2><span searchabletext="Logistique">Logistique</span></h2><div class="row mt16 o_settings_container"><div class="o_setting_box col-12 col-lg-6 o_searchable_setting"><div class="o_setting_left_pane" data-tooltip-delay="800" data-tooltip="Cela permet d&#39;ajouter une route de dropshipping à appliquer aux produits afin de demander à vos fournisseurs de livrer à vos clients. Un produit en dropshipping génère une demande de prix d&#39;achat une fois la commande client confirmée. Il s&#39;agit d&#39;un flux à la demande. L&#39;adresse de livraison demandée est celle de votre client, et non de votre entrepôt."><div name="module_stock_dropshipping" class="o_field_widget o_field_boolean"><div class="o-checkbox form-check d-inline-block"><input type="checkbox" class="form-check-input" id="module_stock_dropshipping_0"><label class="form-check-label" for="module_stock_dropshipping_0"></label></div></div></div><div class="o_setting_right_pane" data-tooltip-delay="800" data-tooltip="Cela permet d&#39;ajouter une route de dropshipping à appliquer aux produits afin de demander à vos fournisseurs de livrer à vos clients. Un produit en dropshipping génère une demande de prix d&#39;achat une fois la commande client confirmée. Il s&#39;agit d&#39;un flux à la demande. L&#39;adresse de livraison demandée est celle de votre client, et non de votre entrepôt."><label class="o_form_label" for="module_stock_dropshipping_0"><span searchabletext="Dropshipping">Dropshipping</span></label><a title="Documentation" class="o_doc_link me-2" target="_blank" href="https://www.odoo.com/documentation/17.0/applications/inventory_and_mrp/inventory/shipping/operation/dropshipping.html"></a><div class="text-muted"><span searchabletext="Demander à vos fournisseurs de livrer à vos clients">Demander à vos fournisseurs de livrer à vos clients</span></div><div class="mt16"></div></div></div></div></div></div></div></div></div></div></div></div><div class="o-main-components-container"><div class="o-discuss-CallInvitations position-absolute top-0 end-0 d-flex flex-column p-2"></div><div class="o-mail-ChatWindowContainer"></div><div class="o-overlay-container"></div><div></div><div class="o_notification_manager o_upload_progress_toast"></div><div class="o_notification_manager"></div></div><img id="fake-image" src="chrome-extension://mcgbeeipkmelnpldkobichboakdfaeon/images/pixel.png" style="display: none; visibility: hidden; width: 836px; height: 639px;"><div class="jcrop-holder" style="width: 835.636px; height: 639.273px; position: relative; display: none;"><div style="position: absolute; z-index: 600;"><div style="width: 100%; height: 100%; z-index: 310; position: absolute; overflow: hidden;"><img src="chrome-extension://mcgbeeipkmelnpldkobichboakdfaeon/images/pixel.png" style="border: none; visibility: visible; margin: 0px; padding: 0px; position: absolute; top: 0px; left: 0px; width: 835.636px; height: 639.273px;"><div class="jcrop-hline" style="position: absolute; opacity: 0.4;"></div><div class="jcrop-hline bottom" style="position: absolute; opacity: 0.4;"></div><div class="jcrop-vline right" style="position: absolute; opacity: 0.4;"></div><div class="jcrop-vline" style="position: absolute; opacity: 0.4;"></div><div class="jcrop-tracker" style="cursor: move; position: absolute; z-index: 360;"></div></div><div style="width: 100%; height: 100%; z-index: 320; display: none;"><div class="ord-n jcrop-dragbar" style="cursor: n-resize; position: absolute; z-index: 370;"></div><div class="ord-s jcrop-dragbar" style="cursor: s-resize; position: absolute; z-index: 371;"></div><div class="ord-e jcrop-dragbar" style="cursor: e-resize; position: absolute; z-index: 372;"></div><div class="ord-w jcrop-dragbar" style="cursor: w-resize; position: absolute; z-index: 373;"></div><div class="ord-n jcrop-handle" style="cursor: n-resize; position: absolute; z-index: 374; opacity: 0.5;"></div><div class="ord-s jcrop-handle" style="cursor: s-resize; position: absolute; z-index: 375; opacity: 0.5;"></div><div class="ord-e jcrop-handle" style="cursor: e-resize; position: absolute; z-index: 376; opacity: 0.5;"></div><div class="ord-w jcrop-handle" style="cursor: w-resize; position: absolute; z-index: 377; opacity: 0.5;"></div><div class="ord-nw jcrop-handle" style="cursor: nw-resize; position: absolute; z-index: 378; opacity: 0.5;"></div><div class="ord-ne jcrop-handle" style="cursor: ne-resize; position: absolute; z-index: 379; opacity: 0.5;"></div><div class="ord-se jcrop-handle" style="cursor: se-resize; position: absolute; z-index: 380; opacity: 0.5;"></div><div class="ord-sw jcrop-handle" style="cursor: sw-resize; position: absolute; z-index: 381; opacity: 0.5;"></div></div></div><div class="jcrop-tracker" style="width: 839.636px; height: 643.273px; position: absolute; top: -2px; left: -2px; z-index: 290; cursor: crosshair;"></div><input type="radio" class="jcrop-keymgr" style="position: fixed; left: -120px; width: 12px;"><img src="chrome-extension://mcgbeeipkmelnpldkobichboakdfaeon/images/pixel.png" style="display: block; visibility: visible; width: 835.636px; height: 639.273px; border: none; margin: 0px; padding: 0px; position: absolute; top: 0px; left: 0px;"></div></body></html>

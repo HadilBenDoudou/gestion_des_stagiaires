@@ -1,0 +1,181 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "gestion_stag";
+
+// Vérifier si le formulaire a été soumis
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Vérifier si les champs requis sont définis et non vides
+    if (isset($_POST["userid"]) && isset($_POST["message"]) && !empty($_POST["userid"]) && !empty($_POST["message"])) {
+        // Récupérer les données du formulaire
+        $receiverId = $_POST["userid"];
+        $message = $_POST["message"];
+
+        // Connexion à la base de données avec PDO
+        try {
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            // Définir le mode d'erreur PDO sur exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // Récupérer l'ID de l'expéditeur à partir de l'URL
+            if (isset($_GET['idUser'])) {
+                $senderId = $_GET['idUser'];
+            } else {
+                // Gérer l'erreur si idUser n'est pas défini ou est vide
+                echo "Erreur: Identifiant utilisateur expéditeur non trouvé.";
+                exit;
+            }
+            
+
+            // Insérer le message dans la base de données
+            $stmt = $conn->prepare("INSERT INTO messages (sender_id, receiver_id, message_text) VALUES (:senderid, :receiverid, :message)");
+            $stmt->bindParam(':senderid', $senderId);
+            $stmt->bindParam(':receiverid', $receiverId);
+            $stmt->bindParam(':message', $message);
+            $stmt->execute();
+
+        } catch(PDOException $e) {
+            echo "Erreur lors de l'envoi du message: " . $e->getMessage();
+        }
+
+        // Fermer la connexion à la base de données
+        $conn = null;
+    } else {
+        echo "Tous les champs doivent être remplis.";
+    }
+}
+
+// Récupérer l'ID de l'utilisateur sélectionné à partir de l'URL
+$selectedUserId = isset($_GET['idUser']) ? $_GET['idUser'] : null;
+if (isset($_GET['id'])) {
+    $userId = $_GET['id']; // Récupérer l'ID de l'utilisateur depuis l'URL
+} else {
+    // Gérer l'erreur si l'ID de l'utilisateur n'est pas défini ou est vide
+    echo "Erreur: Identifiant utilisateur non trouvé.";
+    exit;
+}
+// Récupérer les utilisateurs depuis la base de données
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    // Définir le mode d'erreur PDO sur exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Récupérer les utilisateurs depuis la base de données
+    $stmt = $conn->prepare("SELECT * FROM utilisateur WHERE iduser != :userid");
+    $stmt->bindParam(':userid', $userId);
+    $stmt->execute();
+    $utilisateurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Récupérer les messages de l'utilisateur sélectionné
+    // Récupérer les messages de l'utilisateur connecté
+    if ($selectedUserId) {
+        $stmt = $conn->prepare("SELECT * FROM messages WHERE (sender_id = :senderid OR receiver_id = :receiverid)");
+        $stmt->bindParam(':senderid', $userId);
+        $stmt->bindParam(':receiverid', $userId);
+        $stmt->execute();
+        $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+} catch(PDOException $e) {
+    echo "Erreur de connexion à la base de données: " . $e->getMessage();
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Messaging App UI with Dark Mode</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="app">
+ <div class="header">
+  <div class="user-settings">
+  </div>
+  <div class="search-bar">
+   <input type="text" placeholder="Rechercher..." />
+  </div>
+  <div class="user-settings">
+  </div>
+ </div>
+ <div class="wrapper">
+  <div class="conversation-area">
+   <?php foreach ($utilisateurs as $user): ?>
+   <div class="msg" data-userid="<?= $user['iduser'] ?>">
+    <img class="msg-profile" src="image2.png" alt="" data-userid="<?= $user['iduser'] ?>"/>
+    <div class="msg-detail">
+     <a class="msg-username" href="?idUser=<?= $user["iduser"] ?>"><?= $user["login"] ?></a>
+     <div class="msg-content">
+      <span class="msg-message"><?= $user['email'] ?></span>
+      <span class="msg-date"><?= $user['role'] ?></span>
+     </div>
+    </div>
+   </div>
+   <?php endforeach; ?>
+   <button class="add"></button>
+   <div class="overlay"></div>
+  </div>
+  <div class="chat-area">
+   <div class="chat-area-header">
+    <div class="chat-area-title">CodePen Group</div>
+    <div class="chat-area-group">
+    </div>
+   </div>
+   <div class="chat-area-main">
+    <div class="detail-area">
+      <?php if ($selectedUserId): ?>
+         <div class="user-details">
+            <h2>Détails de l'utilisateur</h2>
+            <!-- Afficher ici les détails de l'utilisateur sélectionné -->
+         </div>
+         <div class="conversation-history">
+            <h2>Historique de conversation</h2>
+            <ul class="messages">
+               <?php foreach ($messages as $message): ?>
+                  <li class="message <?= ($message['sender_id'] == $selectedUserId) ? 'outgoing' : 'incoming' ?>">
+                     <div class="message-content"><?= $message['message_text'] ?></div>
+                     <div class="message-time"><?= $message['timestamp'] ?></div>
+                  </li>
+               <?php endforeach; ?>
+            </ul>
+         </div>
+      <?php endif; ?>
+    </div>
+   </div>
+   <div class="chat-area-footer">
+    <form method="post" class="message-form">
+     <input type="hidden" name="userid" value="<?= $selectedUserId ?>">
+     <input type="text" name="message" placeholder="Entrez votre message ici">
+     <button type="submit">Envoyer</button>
+    </form>
+   </div>
+  </div>
+ </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Lorsque l'utilisateur clique sur un utilisateur
+    $('.msg').click(function() {
+        var userId = $(this).data('userid'); // Correction de la syntaxe
+        window.location.href = "index.php?idUser=" + userId;
+    });
+    function scrollToBottom() {
+        var chatArea = $('.chat-area-main');
+        chatArea.scrollTop(chatArea.prop("scrollHeight"));
+    }
+
+    // Appel de la fonction de défilement automatique au chargement de la page
+    scrollToBottom();
+
+    // Faire défiler vers le bas lorsqu'un nouveau message est envoyé
+    $("form").submit(function() {
+        scrollToBottom();
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,497 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "gestion_stag";
+
+// Vérifier si le formulaire a été soumis
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Vérifier si les champs requis sont définis et non vides
+    if (isset($_POST["userid"]) && isset($_POST["message"]) && !empty($_POST["userid"]) && !empty($_POST["message"])) {
+        // Récupérer les données du formulaire
+        $receiverId = $_POST["userid"];
+        $message = $_POST["message"];
+
+        // Connexion à la base de données avec PDO
+        try {
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            // Définir le mode d'erreur PDO sur exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+           
+             // Récupérer l'ID de l'expéditeur à partir de l'URL
+             if (isset($_GET['idUser'])) {
+                $selectedUserId = $_GET['idUser'];
+            } else {
+                $selectedUserId = null;
+            }
+            $sender = ""; // Définition d'une valeur par défaut pour $sender
+
+if(isset($_GET['sender'])) {
+    $sender = $_GET['sender'];
+    // Utilisez $sender comme nécessaire
+}
+
+            // Insérer le message dans la base de données
+            $stmt = $conn->prepare("INSERT INTO messages (sender_id, receiver_id, message_text) VALUES (:senderid, :receiverid, :message)");
+            $stmt->bindParam(':senderid', $sender);
+            $stmt->bindParam(':receiverid', $receiverId);
+            $stmt->bindParam(':message', $message);
+            $stmt->execute();
+
+        } catch(PDOException $e) {
+            echo "Erreur lors de l'envoi du message: " . $e->getMessage();
+        }
+
+        // Fermer la connexion à la base de données
+        $conn = null;
+    } else {
+        echo "Tous les champs doivent être remplis.";
+    }
+}
+
+// Récupérer l'ID de l'utilisateur sélectionné à partir de l'URL
+$selectedUserId = isset($_GET['idUser']) ? $_GET['idUser'] : null;
+
+// Récupérer les utilisateurs depuis la base de données
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    // Définir le mode d'erreur PDO sur exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Récupérer les utilisateurs depuis la base de données
+    $stmt = $conn->query("SELECT * FROM utilisateur where role!='ADMIN'");
+    $utilisateurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Récupérer les messages de l'utilisateur sélectionné
+    if ($selectedUserId) {
+        $stmt = $conn->prepare("SELECT * FROM messages WHERE receiver_id = :userid");
+        $stmt->bindParam(':userid', $selectedUserId);
+        $stmt->execute();
+        $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+} catch(PDOException $e) {
+    echo "Erreur de connexion à la base de données: " . $e->getMessage();
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Messaging App UI with Dark Mode</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="app">
+ <div class="header">
+
+ 
+  <div class="user-settings">
+  
+   
+  </div>
+ 
+  <div class="search-bar">
+   <input type="text" placeholder="Rechercher..." />
+  </div>
+  <div class="user-settings">
+   <!-- Icônes de paramètres utilisateur ici -->
+  </div>
+ </div>
+ <div class="wrapper">
+  <div class="conversation-area">
+  <?php
+session_start();
+
+$sender = ""; // Définition d'une valeur par défaut pour $sender
+
+if(isset($_GET['sender'])) {
+    $sender = $_GET['sender'];
+    // Utilisez $sender comme nécessaire
+}
+
+foreach ($utilisateurs as $user): ?>
+    <div class="msg" data-userid="<?= $user['iduser'] ?>">
+        <img class="msg-profile" src="image2.png" alt="" data-userid="<?= $user['iduser'] ?>"/>
+        <div class="msg-detail">
+            <a class="msg-username" href="?idUser=<?= $user["iduser"] ?>&sender=<?= $sender ?>">
+                <?= $user["login"] ?>
+            </a>
+            <div class="msg-content">
+                <span class="msg-message"><?= $user['email'] ?></span>
+                <span class="msg-date"><?= $user['role'] ?></span>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+
+   <button class="add"></button>
+   <div class="overlay"></div>
+  </div>
+  <div class="chat-area">
+   <div class="chat-area-header">
+    <div class="chat-area-title">CodePen Group</div>
+    <div class="chat-area-group">
+     <!-- Ici, vous pouvez afficher des informations sur le groupe -->
+    </div>
+   </div>
+ <!-- Dans la section chat-area-main -->
+<div class="chat-area-main">
+    <?php if ($selectedUserId && isset($messages)): ?>
+    <div class="chat-messages">
+        <ul class="messages">
+            <?php foreach ($messages as $message): ?>
+            <li class="message <?= ($message['sender_id'] == $selectedUserId) ? 'outgoing' : 'incoming' ?>">
+                <div class="message-content"><?= $message['message_text'] ?></div>
+                <div class="message-time"><?= $message['timestamp'] ?></div>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <?php endif; ?>
+</div>
+
+<div class="chat-area-footer">
+    <form method="post" class="message-form">
+        <input type="hidden" name="userid" value="<?= $selectedUserId ?>">
+        <input type="text" name="message" placeholder="Entrez votre message ici">
+        <button type="submit">Envoyer</button>
+    </form>
+</div>
+
+  <div class="detail-area">
+   <!-- Détails de l'utilisateur sélectionné ici -->
+  </div>
+ </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Lorsque l'utilisateur clique sur un utilisateur
+    $('.msg').click(function() {
+    var userId = $(this).data('userid'); // Ajoutez un point après 'this' pour accéder à la méthode data()
+    window.location.href = "index.php?idUser=" + userId;
+});
+
+    function scrollToBottom() {
+        var chatArea = $('.chat-area-main');
+        chatArea.scrollTop(chatArea.prop("scrollHeight"));
+    }
+
+    // Appel de la fonction de défilement automatique au chargement de la page
+    scrollToBottom();
+
+    // Faire défiler vers le bas lorsqu'un nouveau message est envoyé
+    $("form").submit(function() {
+        scrollToBottom();
+    });
+});
+
+</script>
+</body>
+</html>
+
+<style>
+    .message-content {
+  color: #333;
+}
+    /* Style de base pour les liens */
+    a {
+    color: black; /* Couleur du texte du lien */
+    text-decoration: underline; /* Soulignement du lien */
+}
+
+/* Style pour les liens avec la classe 'msg-username' */
+.msg-username {
+    color: #333; /* Couleur du texte du lien */
+    text-decoration: none; /* Aucun soulignement */
+    font-weight: bold; /* Police en gras */
+}
+
+.msg-username:hover {
+    text-decoration: underline; /* Soulignement au survol */
+}
+    /* Dans votre fichier CSS */
+.chat-area-main {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.chat-messages {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.message {
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    max-width: 70%;
+}
+
+.incoming {
+    background-color: black;
+    align-self: flex-start;
+}
+
+.outgoing {
+    background-color: #e3e5e6;
+    align-self: flex-end;
+}
+
+.message-content {
+    word-wrap: break-word;
+}
+
+.message-time {
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
+}
+.message-form {
+    display: flex;
+}
+
+.message-form input[type="text"] {
+    flex: 1;
+    margin-right: 5px; /* Ajoute un espacement entre l'input et le bouton */
+}
+
+.message-form button {
+    flex-shrink: 0; /* Empêche le bouton de rétrécir pour s'adapter */
+}
+
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+session_start();
+
+// Vérifie si l'utilisateur est connecté
+if (!isset($_SESSION['user']['iduser'])) {
+    // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
+    header("Location: login.php");
+    exit;
+}
+
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "gestion_stag";
+
+// Récupère l'ID de l'utilisateur connecté depuis la session
+$userId = $_SESSION['user']['iduser'];
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Récupère les utilisateurs, excluant l'utilisateur connecté
+    $stmt = $conn->prepare("SELECT * FROM utilisateur WHERE iduser != :userid");
+    $stmt->bindParam(':userid', $userId);
+    $stmt->execute();
+    $utilisateurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Vérifie si un utilisateur est sélectionné
+    $selectedUserId = isset($_GET['idUser']) ? $_GET['idUser'] : null;
+
+    // Récupère les messages si un utilisateur est sélectionné
+    if ($selectedUserId) {
+        // Récupère les messages reçus et envoyés par l'utilisateur connecté avec les détails des expéditeurs et des destinataires
+        $stmt = $conn->prepare("SELECT m.*, s.login AS sender_login, r.login AS receiver_login FROM messages m LEFT JOIN utilisateur s ON m.sender_id = s.iduser LEFT JOIN utilisateur r ON m.receiver_id = r.iduser WHERE (sender_id = :userid AND receiver_id = :selectedUserId) OR (sender_id = :selectedUserId AND receiver_id = :userid) ORDER BY timestamp ASC");
+        $stmt->bindParam(':userid', $userId);
+        $stmt->bindParam(':selectedUserId', $selectedUserId);
+        $stmt->execute();
+        $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+} catch(PDOException $e) {
+    echo "Erreur de connexion à la base de données: " . $e->getMessage();
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Messages</title>
+    <!-- Ajoutez vos feuilles de style et scripts ici -->
+</head>
+<body>
+    <h1>Messages</h1>
+    <div>
+        <!-- Afficher la liste des utilisateurs -->
+        <h2>Liste des Utilisateurs</h2>
+        <ul>
+            <?php foreach ($utilisateurs as $user): ?>
+                <li><a href="?idUser=<?= $user['iduser'] ?>"><?= htmlspecialchars($user['login']) ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <div>
+        <!-- Afficher les messages avec l'utilisateur sélectionné -->
+        <?php if ($selectedUserId && isset($messages)): ?>
+            <h2>Conversation avec <?= htmlspecialchars($selectedUserId) ?></h2>
+            <ul>
+                <?php foreach ($messages as $message): ?>
+                    <li>
+                        <?= htmlspecialchars($message['timestamp']) ?> -
+                        <?php if ($message['sender_id'] == $userId): ?>
+                            Moi: <?= htmlspecialchars($message['message_text']) ?>
+                        <?php else: ?>
+                            <?= htmlspecialchars($selectedUserId) ?>: <?= htmlspecialchars($message['message_text']) ?>
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+
+            <!-- Formulaire pour répondre aux messages -->
+            <h3>Répondre au message :</h3>
+            <form action="repondre.php" method="post">
+                <input type="hidden" name="receiverId" value="<?= htmlspecialchars($selectedUserId) ?>">
+                <textarea name="replyMessage" placeholder="Votre réponse ici" rows="4" cols="50"></textarea><br>
+                <input type="submit" value="Envoyer">
+            </form>
+        <?php endif; 
+        
+        ?>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+// Vérifier si l'ID de l'utilisateur connecté est présent dans l'URL
+if (!isset($_GET['userId'])) {
+    echo "Erreur: ID de l'utilisateur non spécifié.";
+    exit(); // Arrêter l'exécution du script
+}
+
+// Récupérer l'ID de l'utilisateur connecté à partir de l'URL
+$idUtilisateurConnecte = $_GET['userId'];
+
+// Connexion à la base de données (à remplacer avec vos propres informations de connexion)
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "gestion_stag";
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    // Récupération des informations sur l'utilisateur connecté
+    $stmt_user = $conn->prepare("SELECT * FROM utilisateur WHERE iduser = :idUtilisateur");
+    $stmt_user->bindParam(':idUtilisateur', $idUtilisateurConnecte);
+    $stmt_user->execute();
+
+    if ($stmt_user->rowCount() > 0) {
+        $row_user = $stmt_user->fetch(PDO::FETCH_ASSOC);
+        echo "Utilisateur connecté: " . $row_user["login"]. " - Email: " . $row_user["email"]. "<br>";
+
+        // Afficher la liste des autres utilisateurs
+        $stmt_other_users = $conn->prepare("SELECT * FROM utilisateur WHERE iduser != :idUtilisateur");
+        $stmt_other_users->bindParam(':idUtilisateur', $idUtilisateurConnecte);
+        $stmt_other_users->execute();
+
+        echo "<h2>Autres utilisateurs :</h2>";
+        echo "<ul>";
+        while ($row_other_user = $stmt_other_users->fetch(PDO::FETCH_ASSOC)) {
+            echo "<li><a href='?userId={$idUtilisateurConnecte}&receiver={$row_other_user['iduser']}'>" . $row_other_user["login"] . "</a></li>";
+        }
+        echo "</ul>";
+
+        // Vérifier si un destinataire a été sélectionné
+        $idDestinataire = isset($_GET['receiver']) ? $_GET['receiver'] : null;
+
+        if ($idDestinataire !== null) {
+            // Afficher les messages échangés avec le destinataire sélectionné
+            $stmt_messages = $conn->prepare("SELECT * FROM messages WHERE (sender_id = :idUtilisateur AND receiver_id = :idDestinataire) OR (sender_id = :idDestinataire AND receiver_id = :idUtilisateur)");
+            $stmt_messages->bindParam(':idUtilisateur', $idUtilisateurConnecte);
+            $stmt_messages->bindParam(':idDestinataire', $idDestinataire);
+            $stmt_messages->execute();
+
+            echo "<h2>Messages avec " . $row_user['login'] . " :</h2>";
+            echo "<ul>";
+            while ($row_message = $stmt_messages->fetch(PDO::FETCH_ASSOC)) {
+                echo "<li>De: " . $row_message['sender_id'] . " - À: " . $row_message['receiver_id'] . " - Contenu: " . $row_message['message_text'] . "</li>";
+            }
+            echo "</ul>";
+
+            // Formulaire pour envoyer un nouveau message
+            echo "<h2>Envoyer un nouveau message :</h2>";
+            echo "<form method='post'>";
+            echo "<input type='hidden' name='sender' value='{$idUtilisateurConnecte}'>";
+            echo "<input type='hidden' name='receiver' value='{$idDestinataire}'>";
+            echo "<textarea name='message' placeholder='Votre message'></textarea><br>";
+            echo "<input type='submit' name='submit' value='Envoyer'>";
+            echo "</form>";
+
+            // Traitement de l'envoi de message
+            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+                $sender = $_POST['sender'];
+                $receiver = $_POST['receiver'];
+                $messageText = $_POST['message'];
+
+                $stmt_insert_message = $conn->prepare("INSERT INTO messages (sender_id, receiver_id, message_text) VALUES (:sender, :receiver, :message)");
+                $stmt_insert_message->bindParam(':sender', $sender);
+                $stmt_insert_message->bindParam(':receiver', $receiver);
+                $stmt_insert_message->bindParam(':message', $messageText);
+
+                if ($stmt_insert_message->execute()) {
+                    // Redirection vers la même page avec les mêmes paramètres d'URL
+                    header("Location: index.php?userId={$idUtilisateurConnecte}&receiver={$idDestinataire}");
+                    exit();
+                } else {
+                    echo "Erreur lors de l'envoi du message.";
+                }
+            }
+        }
+    } else {
+        echo "Utilisateur non trouvé dans la base de données.";
+    }
+} catch(PDOException $e) {
+    echo "Erreur: " . $e->getMessage();
+}
+
+$conn = null; // Fermer la connexion
+?>
